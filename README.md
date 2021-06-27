@@ -1,2 +1,2 @@
-# courser
+# course
  USA PIG COW
