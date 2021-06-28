@@ -8,6 +8,6 @@
   </a>
 
   <div class="float-right">
-    <a href="{{route('about')}}" >關於</a>
+    <a href="{{route('about')}}" >About</a>
   </div>
 </footer>

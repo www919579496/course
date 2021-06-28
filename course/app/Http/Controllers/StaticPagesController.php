@@ -31,4 +31,12 @@ class StaticPagesController extends Controller
     {
         return view('static_pages.about');
     }
+    public function search(Request $request){
+        
+        $keyword = $request->keyword;
+        $statuses = status::where('content', 'LIKE', "%$keyword%")->orderBy('created_at', 'DESC')->paginate(10);
+        //var_dump($statuses);
+        // var_dump($keyword);
+         return view('static_pages.result', compact('statuses', 'keyword')); 
+    }
 }

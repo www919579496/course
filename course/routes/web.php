@@ -14,24 +14,27 @@
 Route::get('/qr', function () {
     return view('simpleqrcode');
 });
-
-//靜態網頁
+/*-----------------------------------------not USA pig cow---------------------------------*/
+// static page
 Route::get('/', 'StaticPagesController@home')->name('home');
 Route::get('/help', 'StaticPagesController@help')->name('help');
 Route::get('/about', 'StaticPagesController@about')->name('about');
-//用戶
+// users
 Route::get('/register','UsersController@register')->name('register');
 Route::resource('users','UsersController');
-//會話路由
+// Session 
 Route::get('/login', 'SessionsController@create')->name('login');
 Route::post('/login', 'SessionsController@store')->name('login');
 Route::delete('/logout', 'SessionsController@destroy')->name('logout');
-//email寄信激活
+//email activied
 Route::get('register/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email');
-//密碼重置
+//password reset
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');//显示重置密码的邮箱发送页面
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');//邮箱发送重设链接
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');//密码更新页面
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');//執行密碼更新操作
-//微博創建和刪除
+//tweet create and delete
 Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy']]);
+/*-----------------------------------------not USA pig cow---------------------------------*/
+Route::resource('product','ProductController');
+Route::get('/search','StaticPagesController@search')->name('search');

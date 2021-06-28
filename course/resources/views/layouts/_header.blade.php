@@ -4,11 +4,11 @@
   <div class="container ">
     <a class="navbar-brand" href="{{ route('home') }}">肉品安全追溯系統</a>
 
-    <form action= "{{route('home')}}"  class="search-form">
+    <form action= "{{route('search')}}"  class="search-form">
       <div class="form-row">
         <div class="col-md-12">
           <div class="form-row">
-            <div class="col-auto"><input type="text" class="form-control form-control-sm" name="search" placeholder="請輸入追溯碼"></div>
+            <div class="col-auto"><input type="text" class="form-control form-control-sm" name="keyword" placeholder="please input tracecode"></div>
             <div class="col-auto"><button class="btn btn-primary btn-sm">search</button></div>
           </div>
         </div>
@@ -17,15 +17,15 @@
     <ul class="navbar-nav justify-content-end">
       @if (Auth::check())  {{-- 登錄返回True,未登錄返回false--}}
 
-        <li class="nav-item"><a class="nav-link " href="{{route('users.index')}}">用戶list</a></li>
+        <li class="nav-item"><a class="nav-link " href="{{route('users.index')}}">user list</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ Auth::user()->name }}
           </a>
 
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}">個人中心</a>
-            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">編輯你的資料</a>
+            <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}">perosonal info</a>
+            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">edit your profile</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" id="logout" href="#">
 
@@ -34,7 +34,7 @@
                 {{ csrf_field() }}
                 {{ method_field('DELETE') }}
 
-                <button class="btn btn-block btn-danger" type="submit" name="button">登出</button>
+                <button class="btn btn-block btn-danger" type="submit" name="button">logout</button>
               </form>
               {{--
               可以看到用户退出登录的按钮实际上是一个表单的提交按钮，在点击退出按钮之后浏览器将向 /logout 地址发送一个 POST 请求。
@@ -48,8 +48,8 @@
           </div>
         </li>
       @else
-        <li class="nav-item"><a class="nav-link text-white" href="{{ route('help') }}">幫助</a></li>
-        <li class="nav-item" ><a class="nav-link text-white" href="{{ route('login') }}">登錄</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{{ route('help') }}">help</a></li>
+        <li class="nav-item" ><a class="nav-link text-white" href="{{ route('login') }}">login</a></li>
       @endif
     </ul>
   </div>

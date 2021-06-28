@@ -8,7 +8,7 @@
     {!! $feed_items->render() !!}
   </div>
 @else
-  <p>沒有數據！</p>
+  <p>No data！</p>
 @endif
 
 {{--现在让我们来接着定义一个微博动态流局部视图，用于渲染微博动态列表。

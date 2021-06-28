@@ -21,13 +21,13 @@
   @else
     <div class="jumbotron">
       <p class="lead">
-        這裏是 <a href="/">肉品安全追溯系統</a> 主頁。
+        Home page
       </p>
       <p>
             
       </p>
       <p>
-        <a class="btn btn-lg btn-success" href="{{ route('register') }}" role="button">現在注冊</a>
+        <a class="btn btn-lg btn-success" href="{{ route('register') }}" role="button">Now register</a>
       </p>
     </div>
   @endif

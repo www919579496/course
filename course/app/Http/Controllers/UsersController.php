@@ -14,11 +14,11 @@ class UsersController extends Controller
      */
     public function __construct(){
         $this->middleware('auth', [            
-            'except' => ['show', 'register', 'store','index','confirmEmail']//除了這些動作外，其他都必須登錄后才能操作
+            'except' => ['show', 'register', 'store','index','confirmEmail','search']//除了這些動作外，其他都必須登錄后才能操作
         ]);
 
         $this->middleware('guest',[
-            'only'=>['register']
+            'only'=>['register','search']
         ]);
     }
     public function index(){
@@ -33,6 +33,8 @@ class UsersController extends Controller
     public function create(){
         return view('users.create');
     }
+
+
 
     public function show(User $user){
         $statuses = $user->statuses()
