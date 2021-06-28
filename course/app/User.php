@@ -64,6 +64,16 @@ class User extends Authenticatable
         return $this->statuses()
                     ->orderBy('created_at', 'desc');
     }
+    // our project
+    public function user_type(){
+        return $this->belongsTo(user_type::class,'user_type_id');
+    }
+    public function products(){
+        return $this->hasMany(prodcut::class,'farmer_id');
+        return $this->hasMany(product::class,'merchant_id');
+    }
+    
+    
     /*
     在开始之前，我们需要在用户模型中定义一个 feed 方法，
     该方法将当前用户发布过的所有微博从数据库中取出，并根据创建时间来倒序排序。
