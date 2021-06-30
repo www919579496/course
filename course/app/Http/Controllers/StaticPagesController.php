@@ -37,6 +37,6 @@ class StaticPagesController extends Controller
         $statuses = status::where('content', 'LIKE', "%$keyword%")->orderBy('created_at', 'DESC')->paginate(10);
         //var_dump($statuses);
         // var_dump($keyword);
-         return view('static_pages.result', compact('statuses', 'keyword')); 
+         return view('static_pages._search_result', compact('statuses', 'keyword')); 
     }
 }

@@ -14,11 +14,9 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->increments('id');//PK
-            $table->unsignedBigInteger('farmer_id');//FK
-            $table->foreign('farmer_id')->references('id')->on('users');
-            $table->unsignedBigInteger('merchant_id');//FK
-            $table->foreign('farmer_id')->references('id')->on('users');
+            $table->increments('id')->unsignedBigInteger();//PK
+            $table->unsignedBigInteger('user_id');//FK
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->string('image');
             $table->float('weight');

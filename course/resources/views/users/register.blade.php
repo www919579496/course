@@ -32,6 +32,17 @@
             <label for="password_confirmation">confirm password：</label>
             <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}">
           </div>
+         
+          <div class="form-group">
+            <label for="exampleFormControlSelect2">please select your user type:</label>
+            <select name="user_type" multiple class="form-control" id="usertype_FormControlSelect">
+              <option value="Farmer">Farmer</option>
+              <option value="Food_Inc">Food Inc</option>
+              <option value="wholesale_center">wholesale center</option>
+              <option value="merchant">merchant</option>
+              <option value="consumer">consumer</option>
+            </select>
+          </div>
 
           <button type="submit" class="btn btn-primary">clickt o register</button>
       </form>

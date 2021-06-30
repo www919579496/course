@@ -14,12 +14,12 @@ class CreateProductProcessTable extends Migration
     public function up()
     {
         Schema::create('product_process', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsignedBigInteger();
             $table->unsignedBigInteger('product_id');//FK
             $table->foreign('product_id')->references('id')->on('products');
             $table->unsignedBigInteger('process_id');//FK
             $table->foreign('process_id')->references('id')->on('processes');
-            $table->timestamps('create_at');
+            $table->timestamp('create_at');
             $table->timestamps();
         });
     }

@@ -38,3 +38,7 @@ Route::resource('statuses', 'StatusesController', ['only' => ['store', 'destroy'
 /*-----------------------------------------not USA pig cow---------------------------------*/
 Route::resource('product','ProductController');
 Route::get('/search','StaticPagesController@search')->name('search');
+//api 
+Route::get('/apiget', function () {
+    return file_get_contents('http://192.168.31.43:3000/?username=leandroisamotherfucker');
+});

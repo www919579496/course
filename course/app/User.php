@@ -22,7 +22,7 @@ class User extends Authenticatable
         后面我将在后面章节『进行微博模型构建』时，为你演示『批量赋值』的报错。为了
         提高应用的安全性，Laravel 在用户模型中默认为我们添加了 fillable 在过滤用户
         提交的字段，只有包含在该属性中的字段才能够被正常更新：*/
-        'name', 'email', 'password',
+        'name', 'email', 'password','user_type',
     ];
 
     /**
@@ -69,8 +69,7 @@ class User extends Authenticatable
         return $this->belongsTo(user_type::class,'user_type_id');
     }
     public function products(){
-        return $this->hasMany(prodcut::class,'farmer_id');
-        return $this->hasMany(product::class,'merchant_id');
+        return $this->hasMany(prodcut::class,'user_id');
     }
     
     

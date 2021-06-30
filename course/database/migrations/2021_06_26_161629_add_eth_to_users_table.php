@@ -14,8 +14,7 @@ class AddEthToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_type_id');//FK
-            $table->foreign('user_type_id')->references('id')->on('user_types');
+            $table->string('user_type');
             $table->string('eth_acc_address');
             $table->string('location');
         });
@@ -29,8 +28,7 @@ class AddEthToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_type_id');//FK
-            $table->foreign('user_type_id')->references('id')->on('user_types');
+            $table->string('user_type');
             $table->string('eth_acc_address');
             $table->string('location'); 
         });

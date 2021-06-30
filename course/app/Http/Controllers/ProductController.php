@@ -3,18 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Status;
+use App\Models\Product;
+use Auth;
 class ProductController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth', [            
-            'except' => ['show', 'register', 'store','index','confirmEmail','search']//除了這些動作外，其他都必須登錄后才能操作
-        ]);
-
-        $this->middleware('guest',[
-            'only'=>['register','search']
-        ]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +35,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'content' => 'required|max:140'
+        ]);
+        //当我们在创建微博的时候，需要通过以下方式来进行创建。这样创建的微博会自动与用户进行关联
+        //因为创建微博的用户始终为当前用户，借助 Laravel 提供的 Auth::user() 
+        //方法我们可以获取到当前用户实例。在创建微博的时候，我们需要对微博的内容进行赋值，因此最终的创建方法如下：
+        Auth::user()->statuses()->create([
+            'content' => $request['content']
+        ]);
+        session()->flash('success', 'post successful!');
+        return redirect()->back();
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\user;
 class UserType extends Model
 {
     protected $table='user_types';

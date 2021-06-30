@@ -23,8 +23,7 @@
       <p class="lead">
         Home page
       </p>
-      <p>
-            
+      <p>   
       </p>
       <p>
         <a class="btn btn-lg btn-success" href="{{ route('register') }}" role="button">Now register</a>
