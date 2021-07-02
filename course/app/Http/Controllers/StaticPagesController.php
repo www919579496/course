@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Models\Status;
+use App\Models;
 use Auth;
 class StaticPagesController extends Controller
 {
@@ -16,8 +17,11 @@ class StaticPagesController extends Controller
     public function home()
     {
         $feed_items = [];
+        //$user=\Auth::user();
         if (Auth::check()) {
-            $feed_items = Auth::user()->feed()->paginate(20);
+            $feed_items = Auth::user()->feed()->paginate(10);
+        }else{
+            $feed_items= Product::orderBy('created_at','desc')->get();
         }
         return view('static_pages/home', compact('feed_items'));
     }
@@ -32,11 +36,11 @@ class StaticPagesController extends Controller
         return view('static_pages.about');
     }
     public function search(Request $request){
-        
+
         $keyword = $request->keyword;
-        $statuses = status::where('content', 'LIKE', "%$keyword%")->orderBy('created_at', 'DESC')->paginate(10);
+        $products = Product::where('id', 'LIKE', "%$keyword%")->orderBy('created_at', 'DESC')->paginate(10);
         //var_dump($statuses);
-        // var_dump($keyword);
-         return view('static_pages._search_result', compact('statuses', 'keyword')); 
+         //var_dump($keyword);
+         return view('static_pages._search_result', compact('products', 'keyword'));
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>@yield('title', '肉品安全追溯系統') - </title>
+    <title>肉品安全追溯系統 - @yield('title') </title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   </head>
 

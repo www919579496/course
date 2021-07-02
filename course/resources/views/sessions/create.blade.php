@@ -2,9 +2,20 @@
 @section('title', 'login')
 
 @section('content')
+    <a>
+        current position:
+        <a href="{{route('home')}}">
+            Home/
+        </a>
+
+        <a href="{{route('login')}}">
+            login
+        </a>
+    </a>
+    <p></p>
 <div class="offset-md-2 col-md-8">
     <div class="card ">
-        <div class="card-header">
+        <div class="card-header bg-success text-white">
             <h5>Login</h5>
         </div>
         <div class="card-body">
@@ -22,7 +33,7 @@
                     <label for="password">password：（<a href="{{ route('password.request') }}">Forgot password?</a>）</label>
                     <input type="password" name="password" class="form-control" value="{{ old('password') }}">
                 </div>
-        
+
                 <div class="form-group">
                     <div class="form-check">
                     <input type="checkbox" class="form-check-input" name="remember" id="exampleCheck1">

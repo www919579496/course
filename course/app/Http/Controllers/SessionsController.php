@@ -16,7 +16,7 @@ class SessionsController extends Controller
     public function create(){
         return view('sessions.create');
     }
-    
+
     public function store(Request $request){
        $credentials = $this->validate($request, [
            'email' => 'required|email|max:255',
@@ -26,7 +26,7 @@ class SessionsController extends Controller
        if (Auth::attempt($credentials,$request->has('remember'))){
             //after sucessed login what action to  do
             if(Auth::user()->activated){
-                session()->flash('success', 'welcomebakc');
+                session()->flash('success', 'welcomeback');
                 $fallback = route('users.show', Auth::user());
                 return redirect()->intended($fallback);
             }else{

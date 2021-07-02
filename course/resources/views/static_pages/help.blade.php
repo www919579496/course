@@ -1,7 +1,17 @@
 @extends('layouts.master')
 @section('title','help page')
-    
+
 
 @section('content')
-  <h1>help page</h1>
+
+    <a>
+        current position:
+        <a href="{{route('home')}}">
+            Home/
+        </a>
+
+        <a href="{{route('help')}}">
+            help
+        </a>
+    </a>
 @stop

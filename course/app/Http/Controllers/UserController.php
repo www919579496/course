@@ -1,62 +1,76 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 use Mail;
-class UsersController extends Controller
+
+class UserController extends Controller
 {
     /*
     __construct 是 PHP 的构造器方法，当一个类对象被创建之前该方法将会被调用。
     我们在 __construct 方法中调用了 middleware 方法，该方法接收两个参数，第一个为中间件的名称，第二个为要进行过滤的动作。
     我们通过 except 方法来设定 指定动作 不使用 Auth 中间件进行过滤，意为 —— 除了此处指定的动作以外，所有其他动作都必须登录用户才能访问
      */
-    public function __construct(){
-        $this->middleware('auth', [            
-            'except' => ['show', 'register', 'store','index','confirmEmail','search']//除了這些動作外，其他都必須登錄后才能操作
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['show', 'register', 'store', 'index', 'confirmEmail', 'search']//除了這些動作外，其他都必須登錄后才能操作
         ]);
 
-        $this->middleware('guest',[
-            'only'=>['register','search']
+        $this->middleware('guest', [
+            'only' => ['register', 'search']
         ]);
     }
-    public function index(){
+
+    public function index()
+    {
         $users = User::paginate(10);
-        return view('users.index',compact('users'));
+        return view('users.index', compact('users'));
     }
 
-    public function register(){
+    public function register()
+    {
         return view('users.register');
     }
 
-    public function create(){
+    public function create()
+    {
         return view('users.create');
     }
 
 
-
-    public function show(User $user){
-        $statuses = $user->statuses()
+    public function show(User $user)
+    {
+        $products = $user->products()
                            ->orderBy('created_at', 'desc')
                            ->paginate(10);
-        return view('users.show', compact('user', 'statuses'));
+        //$user = $user->where('id', $user->id)->with('user_type')->first();
+        //$type_name = $user->user_type->name;
+        //return compact('user', 'type_name');
+        return view('users.show', compact('user', 'products'));
+
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $this->validate($request, [
             'name' => 'required|max:50',
             'email' => 'required|email|unique:users|max:255',
-            'password' => 'required|confirmed|min:6'
+            'password' => 'required|confirmed|min:6',
+            'location' => 'required'
         ]);
-        
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'user_type'=> $request->user_type,
+            'type_id' => $request->type_id,
+            'location' => $request->location,
         ]);
-        
+
         $this->sendEmailConfirmationTo($user);
         session()->flash('success', 'actived email is send,please check it');
         return redirect('/');
@@ -67,30 +81,32 @@ class UsersController extends Controller
         让它只在下一次的请求内有效时，则可以使用 flash 方法。flash 方法接收两个参数，
         第一个为会话的键，第二个为会话的值，我们可以通过下面这行代码的为会话赋值。
          */
-        return redirect()->route('users.show',[$user->id]);
+        return redirect()->route('users.show', [$user->id]);
     }
 
-    public function edit(User $user){
+    public function edit(User $user)
+    {
         $this->authorize('update', $user);
-        return view('users.edit',compact('user'));
+        return view('users.edit', compact('user'));
         //compact() 的字符串可以就是变量的名字，多个变量名用逗号隔开。这个时候注意更改视图的变量输出
     }
 
-    public function update(User $user,Request $request){
+    public function update(User $user, Request $request)
+    {
         $this->authorize('update', $user);
         $this->validate($request, [
             'name' => 'required|max:50',
             'password' => 'required|confirmed|min:6'
         ]);
 
-        $data=[ ];
-        $data['name']=$request->name;
-        if($request->password){
-            $data['password']=bcrypt($request->password);
+        $data = [];
+        $data['name'] = $request->name;
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
         }
         $user->update($data);
-        
-        session()->flash('success','edit successfully');
+
+        session()->flash('success', 'edit successfully');
         return redirect()->route('users.show', $user->id);
         //首先，我们将用户密码验证的 required 规则换成 nullable，这意味着当用户提供空白密码时也会通过验证，
         //因此我们需要对传入的 password 进行判断，当其值不为空时才将其赋值给 data，避免将空白密码保存到数据库中。
@@ -99,7 +115,7 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        $this->authorize('destroy',$user);
+        $this->authorize('destroy', $user);
         $user->delete();
         session()->flash('success', 'delete user successfully!');
         return back();

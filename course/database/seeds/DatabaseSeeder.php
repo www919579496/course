@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         Model::unguard();
 
+        $this->call(UserTypeSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(StatusesTableSeeder::class);
 
         Model::reguard();
        // $this->call(Farmer_productTableSeeder::class);

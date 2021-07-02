@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Process;
 use Illuminate\Http\Request;
 
-class SearchController extends Controller
+class ProcessController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class SearchController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -40,10 +41,10 @@ class SearchController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Process  $process
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Process $process)
     {
         //
     }
@@ -51,10 +52,10 @@ class SearchController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Process  $process
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Process $process)
     {
         //
     }
@@ -63,10 +64,10 @@ class SearchController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Process  $process
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Process $process)
     {
         //
     }
@@ -74,10 +75,10 @@ class SearchController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Process  $process
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Process $process)
     {
         //
     }
