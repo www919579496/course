@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>肉品安全追溯系統</title>
+
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+    <script src="./index.js"></script>    
+  </head>
+
+  <body class="container">
+
+    <h1 class="page-header">美豬美牛專題</h1>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">輸入產品資料</h3>
+        <form class="form-inline" role="form">
+          <div class="form-group">
+            <table>
+              <tr>
+                <td><label for="user_id">user_id:</label> </td>
+                <td>
+                  <input class="form-control" id="user_id">
+                </td>                                        
+              </tr>
+              <tr>
+                <td><label for="name">Name:</label> </td>
+                <td>
+                  <input class="form-control" id="name">
+                </td>                                        
+              </tr>
+              <tr>
+                <td><label for="weight">weight:</label> </td>
+                <td>
+                  <input class="form-control" id="weight">
+                </td>                     
+              </tr>
+              <tr>
+                <td><label for="detail">detail:</label> </td>
+                <td>
+                  <input class="form-control" id="detail">
+                </td>                     
+              </tr>
+              <tr>
+                <td><label for="ractopamine">ractopamine:</label> </td>
+                <td>
+                  <input class="form-control" id="ractopamine">
+                </td>                     
+              </tr>
+            </table>
+          </div>
+        </br>
+          <a href="#" onclick="newProduct()" class="btn btn-primary">Create</a>
+          
+        </form>
+      </div>
+    </div>    
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Get Product data</h3>
+        <form class="form-inline" role="form">
+          <table>
+            <tr>
+              <td><label for="index">輸入產品追溯碼:</label> </td>
+              <td>
+                <input class="form-control" id="index">
+              </td>                                        
+            </tr>
+          </table>
+          <a href="#" onclick="getProduct()" class="btn btn-primary">Get</a>
+        </br>
+          <div class="form-group">
+            <table>
+              <tr>
+                <td>user_id:</td>
+                <td>
+                  <label id="_user_id">
+                </td>                          
+              </tr>
+              <tr>
+                <td>name:</td>
+                <td>
+                  <label id="_name">
+                </td>                          
+              </tr>
+              <tr>
+                <td>weight:</td>
+                <td>
+                  <label id="_weight">
+                </td>                          
+              </tr>
+              <tr>
+                <td>detail:</td>
+                <td>
+                  <label id="_detail">
+                </td>                          
+              </tr>
+              <tr>
+                <td>ractopamine:</td>
+                <td>
+                  <label id="_ractopamine">
+                </td>                          
+              </tr>
+            </table>
+          </div>                
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -3,7 +3,7 @@ const app = express();
 const port = 3000 || process.env.PORT;
 const Web3 = require('web3');
 const truffle_connect = require('./connection/app.js');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); //for post
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,12 +13,25 @@ app.use(bodyParser.json());
 
 app.use('/', express.static('public_static'));
 
+app.get('/apiget', (req, res) => {
+  const data = JSON.parse(req.query.data);
+  console.log(data.name, data.user_id, data.ractopamine);
+  //let sender = req.body.sender;
+  //let receiver = req.body.receiver;
+
+  //truffle_connect.sendCoin(data, sender, receiver, (balance) => {
+    //res.send(balance);
+  //});
+  //res.send(req.query.data);
+})
+
 app.get('/getAccounts', (req, res) => {
   console.log("**** GET /getAccounts ****");
   truffle_connect.start(function (answer) {
     res.send(answer);
   })
 });
+
 
 app.post('/getBalance', (req, res) => {
   console.log("**** GET /getBalance ****");
@@ -53,7 +66,6 @@ app.listen(port, () => {
 
   // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
   truffle_connect.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:7545"));
-
   console.log("Express Listening at http://localhost:" + port);
 
 });

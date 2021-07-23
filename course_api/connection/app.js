@@ -1,7 +1,7 @@
 const contract = require('truffle-contract');
-
 const metacoin_artifact = require('../build/contracts/MetaCoin.json');
 var MetaCoin = contract(metacoin_artifact);
+//artifact包含了很多Info(abi etc)的 json文件，在truffle compile后會在built foleder產生
 
 module.exports = {
   start: function(callback) {
@@ -11,12 +11,13 @@ module.exports = {
     MetaCoin.setProvider(self.web3.currentProvider);
 
     // Get the initial account balance so it can be displayed.
+    //確認有沒有provider，避免重複設置
     self.web3.eth.getAccounts(function(err, accs) {
       if (err != null) {
         console.log("There was an error fetching your accounts.");
         return;
       }
-
+      //檢查賬號有無存在
       if (accs.length == 0) {
         console.log("Couldn't get any accounts! Make sure your Ethereum client is configured correctly.");
         return;
@@ -27,6 +28,7 @@ module.exports = {
       callback(self.accounts);
     });
   },
+  
   refreshBalance: function(account, callback) {
     var self = this;
 
